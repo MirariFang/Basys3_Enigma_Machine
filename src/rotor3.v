@@ -12,57 +12,57 @@ module rotor3(out, in, rotate);
     always @(in or rotate)
     begin
 		if (in == 5'd1) begin
-		  M = 5'd14
+		  M = 5'd14;
 		end else if (in == 5'd2) begin
-		  M = 5'd8
+		  M = 5'd8;
 		end else if (in == 5'd3) begin
-		  M = 5'd24
+		  M = 5'd24;
 		end else if (in == 5'd4) begin
-		  M = 5'd13
+		  M = 5'd13;
 		end else if (in == 5'd5) begin
-		  M = 5'd16
+		  M = 5'd16;
 		end else if (in == 5'd6) begin
-		  M = 5'd18
+		  M = 5'd18;
 		end else if (in == 5'd7) begin
-		  M = 5'd20
+		  M = 5'd20;
 		end else if (in == 5'd8) begin
-		  M = 5'd6
+		  M = 5'd6;
 		end else if (in == 5'd9) begin
-		  M = 5'd19
+		  M = 5'd19;
 		end else if (in == 5'd10) begin
-		  M = 5'd22
+		  M = 5'd22;
 		end else if (in == 5'd11) begin
-		  M = 5'd25
+		  M = 5'd25;
 		end else if (in == 5'd12) begin
-		  M = 5'd1
+		  M = 5'd1;
 		end else if (in == 5'd13) begin
-		  M = 5'd10
+		  M = 5'd10;
 		end else if (in == 5'd14) begin
-		  M = 5'd17
+		  M = 5'd17;
 		end else if (in == 5'd15) begin
-		  M = 5'd2
+		  M = 5'd2;
 		end else if (in == 5'd16) begin
-		  M = 5'd23
+		  M = 5'd23;
 		end else if (in == 5'd17) begin
-		  M = 5'd5
+		  M = 5'd5;
 		end else if (in == 5'd18) begin
-		  M = 5'd3
+		  M = 5'd3;
 		end else if (in == 5'd19) begin
-		  M = 5'd4
+		  M = 5'd4;
 		end else if (in == 5'd20) begin
-		  M = 5'd9
+		  M = 5'd9;
 		end else if (in == 5'd21) begin
-		  M = 5'd26
+		  M = 5'd26;
 		end else if (in == 5'd22) begin
-		  M = 5'd12
+		  M = 5'd12;
 		end else if (in == 5'd23) begin
-		  M = 5'd11
+		  M = 5'd11;
 		end else if (in == 5'd24) begin
-		  M = 5'd7
+		  M = 5'd7;
 		end else if (in == 5'd25) begin
-		  M = 5'd21
+		  M = 5'd21;
 		end else if (in == 5'd26) begin
-		  M = 5'd15
+		  M = 5'd15;
         end else
           M = 5'd0; // If the program runs correctly, this should never be the result
         end

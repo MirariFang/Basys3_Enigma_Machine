@@ -1,74 +1,68 @@
-// Rotor 2 of the enigma machine
-// Contains a map from inputs to corresponding outputs
-// rotate modifies the output value, simulating the rotation process
+// This is the reflector part of the enigma machine.
+// It reflects one signal to another signal.
+// Similar to a rotor but can't rotate.
 
-module rotor2(out, in, rotate);
+module reflector(out, in);
     output [4:0] out;
     input [4:0] in;
-    input [4:0] rotate;
 
-    reg [4:0] M;    // intermediate value
-
-    always @(in or rotate)
+    always @(in)
     begin
-		if (in == 5'd1) begin
-		  M = 5'd6;
+      	if (in == 5'd1) begin
+		  out = 5'd2;
 		end else if (in == 5'd2) begin
-		  M = 5'd15;
+		  out = 5'd18;
 		end else if (in == 5'd3) begin
-		  M = 5'd11;
+		  out = 5'd25;
 		end else if (in == 5'd4) begin
-		  M = 5'd21;
+		  out = 5'd7;
 		end else if (in == 5'd5) begin
-		  M = 5'd4;
+		  out = 5'd11;
 		end else if (in == 5'd6) begin
-		  M = 5'd1;
+		  out = 5'd8;
 		end else if (in == 5'd7) begin
-		  M = 5'd26;
+		  out = 5'd6;
 		end else if (in == 5'd8) begin
-		  M = 5'd14;
+		  out = 5'd5;
 		end else if (in == 5'd9) begin
-		  M = 5'd17;
+		  out = 5'd20;
 		end else if (in == 5'd10) begin
-		  M = 5'd16;
+		  out = 5'd14;
 		end else if (in == 5'd11) begin
-		  M = 5'd24;
+		  out = 5'd23;
 		end else if (in == 5'd12) begin
-		  M = 5'd23;
+		  out = 5'd4;
 		end else if (in == 5'd13) begin
-		  M = 5'd2;
+		  out = 5'd12;
 		end else if (in == 5'd14) begin
-		  M = 5'd10;
+		  out = 5'd9;
 		end else if (in == 5'd15) begin
-		  M = 5'd9;
+		  out = 5'd24;
 		end else if (in == 5'd16) begin
-		  M = 5'd5;
+		  out = 5'd21;
 		end else if (in == 5'd17) begin
-		  M = 5'd8;
+		  out = 5'd26;
 		end else if (in == 5'd18) begin
-		  M = 5'd3;
+		  out = 5'd17;
 		end else if (in == 5'd19) begin
-		  M = 5'd13;
+		  out = 5'd22;
 		end else if (in == 5'd20) begin
-		  M = 5'd19;
+		  out = 5'd10;
 		end else if (in == 5'd21) begin
-		  M = 5'd7;
+		  out = 5'd19;
 		end else if (in == 5'd22) begin
-		  M = 5'd12;
+		  out = 5'd1;
 		end else if (in == 5'd23) begin
-		  M = 5'd18;
+		  out = 5'd13;
 		end else if (in == 5'd24) begin
-		  M = 5'd25;
+		  out = 5'd3;
 		end else if (in == 5'd25) begin
-		  M = 5'd20;
+		  out = 5'd16;
 		end else if (in == 5'd26) begin
-		  M = 5'd22;
-        end else
-          M = 5'd0; // If the program runs correctly, this should never be the result
+		  out = 5'd15;
+        end else begin
+          out = 5'd0;
         end
     end
-    
-    wire [5:0] sum = M + rotate;
-    out = sum % 5'd26;
 
 endmodule
