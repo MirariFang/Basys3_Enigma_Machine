@@ -67,5 +67,4 @@ module rotor3_inv(
           out = 5'd0;   // If the program runs correctly, this should never be the result
         end
     end
-    
 endmodule // rotor1_inv
