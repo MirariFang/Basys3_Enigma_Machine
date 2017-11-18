@@ -2,8 +2,8 @@
 
 module encryption_tb(
     );
-    reg [4:0] a;
-    wire [4:0] b, r1, r2, r3;
+    wire [4:0] a;
+    reg [4:0] b, r1, r2, r3;
 
     encryption e(a, b, r1, r2, r3);
 

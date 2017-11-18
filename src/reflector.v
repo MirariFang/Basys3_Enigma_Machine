@@ -6,6 +6,7 @@ module reflector(out, in);
     output [4:0] out;
     input [4:0] in;
 
+    reg [4:0] out;
     always @(in)
     begin
       	if (in == 5'd1) begin

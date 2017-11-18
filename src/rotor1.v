@@ -63,12 +63,12 @@ module rotor1(out, in, rotate);
 		  M = 5'd26;
 		end else if (in == 5'd26) begin
 		  M = 5'd12;
-        end else
+        end else begin
           M = 5'd0; // If the program runs correctly, this should never be the result
         end
     end
     
     wire [5:0] sum = M + rotate;
-    out = sum % 5'd26;
+    assign out = sum % 5'd26;
 
 endmodule
