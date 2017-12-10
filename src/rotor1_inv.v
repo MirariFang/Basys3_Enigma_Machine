@@ -2,14 +2,20 @@
 // Simulate the reflection signal passing through a rotor.
 
 module rotor1_inv(
-    output [4:0] regout,
+    output reg [4:0] regout,
     input [4:0] in,
     input [4:0] rotate
 );
     wire [5:0] sum = in + 5'd26 - rotate;
-    wire [4:0] M = sum % 5'd26;
-
-    reg [4:0] regout;
+    reg [4:0] M;
+    always @ (sum)
+    begin
+        if (sum == 6'd26 || sum == 6'd52) begin
+            M <= 5'd26;
+        end else begin
+            M <= sum % 5'd26;
+        end
+    end
 
     always @(M or rotate)
     begin
@@ -20,9 +26,9 @@ module rotor1_inv(
 		end else if (M == 5'd13) begin
 		  regout = 5'd3;
 		end else if (M == 5'd4) begin
-		  regout = 5'd4;
-		end else if (M == 5'd17) begin
 		  regout = 5'd5;
+		end else if (M == 5'd17) begin
+		  regout = 5'd4;
 		end else if (M == 5'd7) begin
 		  regout = 5'd6;
 		end else if (M == 5'd14) begin
@@ -47,7 +53,7 @@ module rotor1_inv(
 		  regout = 5'd16;
 		end else if (M == 5'd6) begin
 		  regout = 5'd17;
-		end else if (5'd24) begin
+		end else if (M == 5'd24) begin
 		  regout = 5'd18;
 		end else if (M == 5'd21) begin
 		  regout = 5'd19;
@@ -65,8 +71,8 @@ module rotor1_inv(
 		  regout = 5'd25;
 		end else if (M == 5'd12) begin
 		  regout = 5'd26;
-                end else begin
-                  regout = 5'd0;   // If the program runs correctly, this should never be the result
+        end else begin
+          regout = 5'd0;   // If the program runs correctly, this should never be the result
         end
     end
     //assign out = regout;

@@ -3,7 +3,7 @@
 // rotate modifies the output value, simulating the rotation process
 
 module rotor3(out, in, rotate);
-    output [4:0] out;
+    output reg [4:0] out;
     input [4:0] in;
     input [4:0] rotate;
 
@@ -67,8 +67,15 @@ module rotor3(out, in, rotate);
           M = 5'd0; // If the program runs correctly, this should never be the result
         end
     end
-    
+
     wire [5:0] sum = M + rotate;
-    assign out = sum % 5'd26;
+    always @ (sum)
+    begin
+        if (sum == 6'd26 || sum == 6'd52) begin
+            out <= 5'd26;
+        end else begin
+            out <= sum % 5'd26;
+        end
+    end
 
 endmodule

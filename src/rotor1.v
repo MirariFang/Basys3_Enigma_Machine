@@ -3,7 +3,7 @@
 // rotate modifies the output value, simulating the rotation process
 
 module rotor1(out, in, rotate);
-    output [4:0] out;
+    output reg [4:0] out;
     input [4:0] in;
     input [4:0] rotate;
 
@@ -18,9 +18,9 @@ module rotor1(out, in, rotate);
 		end else if (in == 5'd3) begin
 		  M = 5'd13;
 		end else if (in == 5'd4) begin
-		  M = 5'd4;
-		end else if (in == 5'd5) begin
 		  M = 5'd17;
+		end else if (in == 5'd5) begin
+		  M = 5'd4;
 		end else if (in == 5'd6) begin
 		  M = 5'd7;
 		end else if (in == 5'd7) begin
@@ -67,8 +67,15 @@ module rotor1(out, in, rotate);
           M = 5'd0; // If the program runs correctly, this should never be the result
         end
     end
-    
+
     wire [5:0] sum = M + rotate;
-    assign out = sum % 5'd26;
+    always @ (sum)
+    begin
+        if (sum == 6'd26 || sum == 6'd52) begin
+            out <= 5'd26;
+        end else begin
+            out <= sum % 5'd26;
+        end
+    end
 
 endmodule

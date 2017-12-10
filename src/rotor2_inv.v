@@ -2,14 +2,20 @@
 // Simulate the reflection signal passing through a rotor.
 
 module rotor2_inv(
-    output [4:0] regout,
+    output reg [4:0] regout,
     input [4:0] in,
     input [4:0] rotate
 );
     wire [5:0] sum = in + 5'd26 - rotate;
-    wire [4:0] M = sum % 5'd26;
-
-    reg [4:0] regout;
+    reg [4:0] M;
+    always @ (sum)
+    begin
+        if (sum == 6'd26 || sum == 6'd52) begin
+            M <= 5'd26;
+        end else begin
+            M <= sum % 5'd26;
+        end
+    end
 
     always @(M or rotate)
     begin
