@@ -52,10 +52,11 @@ module top(
         .kclk(PS2Clk),
         .kdata(PS2Data),
         .keycode(keycode),
-        .oflag(flag)
+        .oflag(flag),
+        .myflag(debugflag)
     );
-    
-    
+
+
     always@(keycode)
         if (keycode[7:0] == 8'hf0) begin
             cn <= 1'b0;
@@ -67,19 +68,20 @@ module top(
             cn <= keycode[7:0] != keycodev[7:0] || keycodev[15:8] == 8'hf0;
             bcount <= 3'd2;
         end
-    
+
     always@(posedge clk)
         if (flag == 1'b1 && cn == 1'b1) begin
             start <= 1'b1;
             keycodev <= keycode;
         end else
             start <= 1'b0;
-    bin2ascii #(
-        .NBYTES(2)
-    ) conv (
-        .I(keycodev),
-        .O(tbuf)
-    );
+
+    // bin2ascii #(
+    //     .NBYTES(2)
+    // ) conv (
+    //     .I(keycodev),
+    //     .O(tbuf)
+    // );
 
 
     wire [6:0] tenthous, thous, hunds, tens, ones;
@@ -91,12 +93,13 @@ module top(
     wire mod_clk1, mod_clk2;
     wire [31:0] reg_out;
 
-    //Keyboard receiver(CLK50MHZ, PS2Clk, PS2Data, A);
+    AlphabetDecoder decoder(tens, ones, encrypted_char);
+    assign led[7:0] = keycodev[7:0];
+    // Debugging signals
+    assign led[8] = PS2Data;
+    assign led[9] = PS2Clk;
+    assign led[10] = debugflag;
 
-    register reg0(reg_out, tbuf, CLK50MHZ, (tbuf[7:0] == 8'd48), 1'b0);
-    mux4v #(8) m1(A, reg_out[7:0], reg_out[15:8], reg_out[23:16], reg_out[31:24], sw);
-    wire [15:0] modA = {8'b0, A};
-    DecimalDigitDecoder my_decoder(modA, tenthous, thous, hunds, tens, ones);
     clock_divider #(5000) cd_fast(clk, mod_clk1);    // high frequency clock
 
     mux2v #(8) m0(seg, ones, tens, mod_clk1);
